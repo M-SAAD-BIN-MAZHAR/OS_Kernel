@@ -1,0 +1,7 @@
+PID,Name,BurstTime,ArrivalTime,WaitTime,TurnaroundTime
+1,P1,5,0,11,16
+2,P2,3,1,0,3
+3,P3,8,2,2,10
+
+AvgWaitTime,AvgTurnaroundTime,Throughput
+4.33333,9.66667,0.1875
