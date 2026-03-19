@@ -5,6 +5,8 @@
 #include <atomic>
 #include <mutex>
 #include <string>
+#include <filesystem>
+#include <vector>
 #include "utils/Config.h"
 #include "process/ProcessManager.h"
 #include "process/StateTransition.h"
@@ -20,6 +22,22 @@ std::mutex algoMutex;
 std::string currentAlgorithm = "";
 std::atomic<bool> simulationStarted = false;
 std::atomic<bool> shouldExit = false;
+
+std::string resolveConfigPath() {
+    const std::vector<std::string> candidates = {
+        "config.json",
+        "../config.json",
+        "OS_Kernel/config.json"
+    };
+
+    for (const auto& path : candidates) {
+        if (std::filesystem::exists(path)) {
+            return path;
+        }
+    }
+
+    throw std::runtime_error("Could not find config file (tried config.json, ../config.json, OS_Kernel/config.json)");
+}
 
 void printGantt(const std::vector<ScheduleResult>& results) {
     std::cout << "\nGantt Chart:\n|";
@@ -44,7 +62,6 @@ void runScheduler(Scheduler& scheduler, std::vector<PCB> processes) {
 
 void simulationThread(TCPServer &server) {
     ProcessManager pm;
-    Config::load("config.json");
 
     // Create test processes with custom arrival times
     std::vector<PCB> testProcesses = {
@@ -102,7 +119,7 @@ void simulationThread(TCPServer &server) {
 int main() {
     // --- Phase 0: ProcessManager ---
     ProcessManager pm;
-    Config::load("config.json");
+    Config::load(resolveConfigPath());
 
     for (int i = 0; i < Config::process_count; i++) {
         pm.createProcess(
@@ -153,8 +170,8 @@ int main() {
     }
     simulationStarted = true;
 
-    // Run for 30 seconds
-    std::this_thread::sleep_for(std::chrono::seconds(30));
+    // Run for 5 minutes
+    std::this_thread::sleep_for(std::chrono::seconds(300));
 
     // Shutdown
     std::cout << "\n\nShutting down server...\n";
