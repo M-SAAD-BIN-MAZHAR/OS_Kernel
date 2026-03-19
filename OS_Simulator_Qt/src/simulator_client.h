@@ -30,7 +30,7 @@ private slots:
     void onConnected();
     void onDisconnected();
     void onReadyRead();
-    void onError();
+    void onError(QAbstractSocket::SocketError error);
 
 private:
     void sendCommand(const QString &command);

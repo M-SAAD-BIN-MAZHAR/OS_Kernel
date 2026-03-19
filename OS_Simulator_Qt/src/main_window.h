@@ -8,10 +8,8 @@
 #include <QChartView>
 #include <QTabWidget>
 #include <QLabel>
+#include <QJsonObject>
 #include <memory>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
 
 class GanttWidget;
 class SimulatorClient;
@@ -39,8 +37,8 @@ private:
     void createSettingsTab();
     void createLogsTab();
     void createAboutTab();
-    void updateGanttChart(const json &jsonData);
-    void updateMetricsTable(const json &jsonData);
+    void updateGanttChart(const QJsonObject &jsonData);
+    void updateMetricsTable(const QJsonObject &jsonData);
     void addLog(const QString &message);
 
     // UI Components

@@ -17,7 +17,7 @@
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), client(std::make_unique<SimulatorClient>("localhost", 9000))
+    : QMainWindow(parent), client(std::make_unique<SimulatorClient>("172.21.89.117", 9000))
 {
     setWindowTitle("OS Process Scheduler Simulator");
     setGeometry(100, 100, 1400, 900);
@@ -174,13 +174,17 @@ void MainWindow::onDisconnected() {
 }
 
 void MainWindow::onDataReceived(const QString &data) {
-    try {
-        auto jsonData = json::parse(data.toStdString());
-        updateGanttChart(jsonData);
-        updateMetricsTable(jsonData);
-    } catch (const std::exception &e) {
-        std::cerr << "JSON parse error: " << e.what() << std::endl;
+    const QByteArray payload = data.toUtf8();
+    QJsonParseError parseError;
+    const QJsonDocument doc = QJsonDocument::fromJson(payload, &parseError);
+    if (parseError.error != QJsonParseError::NoError || !doc.isObject()) {
+        std::cerr << "JSON parse error: " << parseError.errorString().toStdString() << std::endl;
+        return;
     }
+
+    const QJsonObject jsonData = doc.object();
+    updateGanttChart(jsonData);
+    updateMetricsTable(jsonData);
 }
 
 void MainWindow::onError(const QString &error) {
@@ -188,53 +192,55 @@ void MainWindow::onError(const QString &error) {
     addLog("ERROR: " + error);
 }
 
-void MainWindow::updateGanttChart(const json &jsonData) {
-    try {
-        if (!jsonData.contains("ganttChart")) return;
-        
-        std::vector<ProcessSchedule> schedule;
-        for (const auto &item : jsonData["ganttChart"]) {
-            ProcessSchedule ps;
-            ps.processName = item["processName"].get<std::string>();
-            ps.startTime = item["startTime"].get<int>();
-            ps.endTime = item["endTime"].get<int>();
-            ps.state = "RUNNING";
-            schedule.push_back(ps);
-        }
-        
-        ganttChart->updateGanttChart(schedule);
-    } catch (const std::exception &e) {
-        std::cerr << "Error updating Gantt chart: " << e.what() << std::endl;
+void MainWindow::updateGanttChart(const QJsonObject &jsonData) {
+    if (!jsonData.contains("ganttChart") || !jsonData.value("ganttChart").isArray()) {
+        return;
     }
+
+    std::vector<ProcessSchedule> schedule;
+    const QJsonArray ganttArray = jsonData.value("ganttChart").toArray();
+    for (const QJsonValue &value : ganttArray) {
+        if (!value.isObject()) {
+            continue;
+        }
+
+        const QJsonObject item = value.toObject();
+        ProcessSchedule ps;
+        ps.processName = item.value("processName").toString().toStdString();
+        ps.startTime = item.value("startTime").toInt();
+        ps.endTime = item.value("endTime").toInt();
+        ps.state = "RUNNING";
+        schedule.push_back(ps);
+    }
+
+    ganttChart->updateGanttChart(schedule);
 }
 
-void MainWindow::updateMetricsTable(const json &jsonData) {
-    try {
-        if (!jsonData.contains("processes")) return;
-        
-        metricsTable->setRowCount(0);
-        
-        int row = 0;
-        for (const auto &proc : jsonData["processes"]) {
-            metricsTable->insertRow(row);
-            
-            metricsTable->setItem(row, 0, new QTableWidgetItem(
-                QString::fromStdString(proc["name"].get<std::string>())));
-            metricsTable->setItem(row, 1, new QTableWidgetItem(
-                QString::number(proc["burstTime"].get<int>())));
-            metricsTable->setItem(row, 2, new QTableWidgetItem(
-                QString::number(proc["arrivalTime"].get<int>())));
-            metricsTable->setItem(row, 3, new QTableWidgetItem(
-                QString::number(proc["waitTime"].get<int>())));
-            metricsTable->setItem(row, 4, new QTableWidgetItem(
-                QString::number(proc["turnaroundTime"].get<int>())));
-            metricsTable->setItem(row, 5, new QTableWidgetItem(
-                QString::number(proc["priority"].get<int>())));
-            
-            row++;
+void MainWindow::updateMetricsTable(const QJsonObject &jsonData) {
+    if (!jsonData.contains("processes") || !jsonData.value("processes").isArray()) {
+        return;
+    }
+
+    metricsTable->setRowCount(0);
+
+    int row = 0;
+    const QJsonArray processes = jsonData.value("processes").toArray();
+    for (const QJsonValue &value : processes) {
+        if (!value.isObject()) {
+            continue;
         }
-    } catch (const std::exception &e) {
-        std::cerr << "Error updating metrics table: " << e.what() << std::endl;
+
+        const QJsonObject proc = value.toObject();
+        metricsTable->insertRow(row);
+
+        metricsTable->setItem(row, 0, new QTableWidgetItem(proc.value("name").toString()));
+        metricsTable->setItem(row, 1, new QTableWidgetItem(QString::number(proc.value("burstTime").toInt())));
+        metricsTable->setItem(row, 2, new QTableWidgetItem(QString::number(proc.value("arrivalTime").toInt())));
+        metricsTable->setItem(row, 3, new QTableWidgetItem(QString::number(proc.value("waitTime").toInt())));
+        metricsTable->setItem(row, 4, new QTableWidgetItem(QString::number(proc.value("turnaroundTime").toInt())));
+        metricsTable->setItem(row, 5, new QTableWidgetItem(QString::number(proc.value("priority").toInt())));
+
+        row++;
     }
 }
 

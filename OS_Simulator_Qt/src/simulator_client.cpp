@@ -9,8 +9,7 @@ SimulatorClient::SimulatorClient(const QString &host, quint16 port, QObject *par
     connect(socket.get(), &QTcpSocket::connected, this, &SimulatorClient::onConnected);
     connect(socket.get(), &QTcpSocket::disconnected, this, &SimulatorClient::onDisconnected);
     connect(socket.get(), &QTcpSocket::readyRead, this, &SimulatorClient::onReadyRead);
-    connect(socket.get(), QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error),
-            this, &SimulatorClient::onError);
+    connect(socket.get(), &QTcpSocket::errorOccurred, this, &SimulatorClient::onError);
 }
 
 SimulatorClient::~SimulatorClient() {
@@ -76,7 +75,8 @@ void SimulatorClient::onReadyRead() {
     }
 }
 
-void SimulatorClient::onError() {
+void SimulatorClient::onError(QAbstractSocket::SocketError error) {
+    Q_UNUSED(error);
     if (socket) {
         std::cout << "Socket error: " << socket->errorString().toStdString() << std::endl;
         emit errorOccurred(socket->errorString());
