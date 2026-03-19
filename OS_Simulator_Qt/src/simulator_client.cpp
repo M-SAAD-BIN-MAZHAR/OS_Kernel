@@ -1,6 +1,7 @@
 #include "simulator_client.h"
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <iostream>
 
 SimulatorClient::SimulatorClient(const QString &host, quint16 port, QObject *parent)
     : QObject(parent), socket(std::make_unique<QTcpSocket>()), host(host), port(port)
@@ -18,6 +19,7 @@ SimulatorClient::~SimulatorClient() {
 
 void SimulatorClient::connectToServer() {
     if (!socket->isOpen()) {
+        std::cout << "Connecting to " << host.toStdString() << ":" << port << std::endl;
         socket->connectToHost(host, port);
     }
 }
@@ -53,10 +55,12 @@ void SimulatorClient::sendCommand(const QString &command) {
 }
 
 void SimulatorClient::onConnected() {
+    std::cout << "Connected to server!" << std::endl;
     emit connected();
 }
 
 void SimulatorClient::onDisconnected() {
+    std::cout << "Disconnected from server" << std::endl;
     emit disconnected();
 }
 
@@ -64,12 +68,17 @@ void SimulatorClient::onReadyRead() {
     if (!socket) return;
     
     QByteArray data = socket->readAll();
-    QString jsonData = QString::fromUtf8(data);
-    emit dataReceived(jsonData);
+    QString jsonData = QString::fromUtf8(data).trimmed();
+    
+    if (!jsonData.isEmpty()) {
+        std::cout << "Received JSON: " << jsonData.toStdString() << std::endl;
+        emit dataReceived(jsonData);
+    }
 }
 
 void SimulatorClient::onError() {
     if (socket) {
+        std::cout << "Socket error: " << socket->errorString().toStdString() << std::endl;
         emit errorOccurred(socket->errorString());
     }
 }

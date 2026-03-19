@@ -1,0 +1,74 @@
+[
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/main.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/main.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/main.cpp",
+  "output": "CMakeFiles/simulator.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/process/ProcessManager.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/process/ProcessManager.cpp",
+  "output": "CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/process/StateTransition.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/process/StateTransition.cpp",
+  "output": "CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/process/ThreadManager.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/process/ThreadManager.cpp",
+  "output": "CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/utils/Config.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/utils/Config.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/utils/Config.cpp",
+  "output": "CMakeFiles/simulator.dir/src/utils/Config.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/utils/Logger.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/utils/Logger.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/utils/Logger.cpp",
+  "output": "CMakeFiles/simulator.dir/src/utils/Logger.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/FCFS.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/FCFS.cpp",
+  "output": "CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/RoundRobin.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/RoundRobin.cpp",
+  "output": "CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Priority.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Priority.cpp",
+  "output": "CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Metrics.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Metrics.cpp",
+  "output": "CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/network/TCPServer.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/network/TCPServer.cpp",
+  "output": "CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/network/SchedulerStateJSON.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/network/SchedulerStateJSON.cpp",
+  "output": "CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o"
+}
+]

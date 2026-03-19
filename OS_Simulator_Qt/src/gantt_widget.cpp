@@ -1,6 +1,11 @@
 #include "gantt_widget.h"
 #include <QChart>
+#include <QBarCategoryAxis>
+#include <QValueAxis>
+#include <QBarSet>
+#include <QPainter>
 #include <QColor>
+#include <algorithm>
 
 GanttWidget::GanttWidget(QWidget *parent)
     : QChartView(parent), series(nullptr), axisX(nullptr), axisY(nullptr)
@@ -12,6 +17,7 @@ void GanttWidget::setupChart() {
     QChart *chart = new QChart();
     chart->setTitle("CPU Scheduling Gantt Chart");
     chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setMargins(QMargins(10, 10, 10, 10));
     
     series = new QBarSeries();
     chart->addSeries(series);
@@ -23,6 +29,7 @@ void GanttWidget::setupChart() {
     
     axisY = new QValueAxis();
     axisY->setLabelFormat("%i ms");
+    axisY->setRange(0, 20);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
     
@@ -31,8 +38,28 @@ void GanttWidget::setupChart() {
 }
 
 void GanttWidget::updateGanttChart(const std::vector<ProcessSchedule> &schedule) {
+    if (schedule.empty()) return;
+    
     clearChart();
     
+    QStringList categories;
+    int maxTime = 0;
+    
+    // Collect all process names and find max time
+    for (const auto &process : schedule) {
+        if (std::find(categories.begin(), categories.end(), 
+                     QString::fromStdString(process.processName)) == categories.end()) {
+            categories.append(QString::fromStdString(process.processName));
+        }
+        maxTime = std::max(maxTime, process.endTime);
+    }
+    
+    axisX->setCategories(categories);
+    if (axisY) {
+        axisY->setRange(0, maxTime + 5);
+    }
+    
+    // Create bars for each process based on their duration
     for (const auto &process : schedule) {
         addScheduleBar(process.processName, process.startTime, process.endTime, process.state);
     }
@@ -42,12 +69,18 @@ void GanttWidget::clearChart() {
     if (series) {
         series->clear();
     }
+    if (axisX) {
+        axisX->clear();
+    }
 }
 
 void GanttWidget::addScheduleBar(const std::string &processName, int startTime, int endTime, const std::string &state) {
     if (!series) return;
     
-    QBarSet *set = new QBarSet(QString::fromStdString(processName));
+    int duration = endTime - startTime;
+    
+    QBarSet *set = new QBarSet(QString::fromStdString(processName) +
+                              QString(" [%1-%2ms]").arg(startTime).arg(endTime));
     
     // Color by state
     if (state == "RUNNING") {
@@ -60,6 +93,6 @@ void GanttWidget::addScheduleBar(const std::string &processName, int startTime, 
         set->setColor(QColor(200, 200, 200)); // Gray
     }
     
-    *set << (endTime - startTime);
+    *set << duration;
     series->append(set);
 }
