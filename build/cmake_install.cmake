@@ -1,4 +1,4 @@
-# Install script for directory: /home/toobarani/OS_Simulator
+# Install script for directory: /home/msaad/OS_Simulator1/OS_Kernel
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/toobarani/OS_Simulator/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/msaad/OS_Simulator1/OS_Kernel/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
