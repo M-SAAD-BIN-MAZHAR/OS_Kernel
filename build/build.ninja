@@ -55,8 +55,6 @@ build CMakeFiles/simulator.dir/src/main.cpp.o: CXX_COMPILER__simulator_unscanned
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/process/ProcessManager.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o.d
@@ -64,8 +62,6 @@ build CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o: CXX_COMPILER__s
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/process
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/process/StateTransition.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o.d
@@ -73,8 +69,6 @@ build CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o: CXX_COMPILER__
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/process
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/process/ThreadManager.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o.d
@@ -82,8 +76,6 @@ build CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o: CXX_COMPILER__si
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/process
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/utils/Config.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/utils/Config.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/utils/Config.cpp.o.d
@@ -91,8 +83,6 @@ build CMakeFiles/simulator.dir/src/utils/Config.cpp.o: CXX_COMPILER__simulator_u
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/utils
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/utils/Logger.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/utils/Logger.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/utils/Logger.cpp.o.d
@@ -100,8 +90,6 @@ build CMakeFiles/simulator.dir/src/utils/Logger.cpp.o: CXX_COMPILER__simulator_u
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/utils
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/FCFS.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o.d
@@ -109,8 +97,6 @@ build CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o: CXX_COMPILER__simulator
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/scheduler
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/RoundRobin.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o.d
@@ -118,8 +104,6 @@ build CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o: CXX_COMPILER__sim
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/scheduler
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Priority.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o.d
@@ -127,8 +111,6 @@ build CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o: CXX_COMPILER__simul
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/scheduler
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/scheduler/Metrics.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o.d
@@ -136,8 +118,6 @@ build CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o: CXX_COMPILER__simula
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/scheduler
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/network/TCPServer.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o.d
@@ -145,8 +125,6 @@ build CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o: CXX_COMPILER__simula
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/network
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 build CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/network/SchedulerStateJSON.cpp || cmake_object_order_depends_target_simulator
   DEP_FILE = CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o.d
@@ -154,8 +132,6 @@ build CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o: CXX_COMPILE
   INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/network
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
-  TARGET_PDB = simulator.pdb
 
 
 # =============================================================================
@@ -171,9 +147,8 @@ build simulator: CXX_EXECUTABLE_LINKER__simulator_Debug CMakeFiles/simulator.dir
   OBJECT_DIR = CMakeFiles/simulator.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/simulator.dir/
   TARGET_FILE = simulator
-  TARGET_PDB = simulator.pdb
+  TARGET_PDB = simulator.dbg
 
 
 #############################################
@@ -218,14 +193,14 @@ build all: phony simulator
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/msaad/OS_Simulator1/OS_Kernel/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.28/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/msaad/OS_Simulator1/OS_Kernel/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/msaad/OS_Simulator1/OS_Kernel/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.28/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
+build /home/msaad/OS_Simulator1/OS_Kernel/CMakeLists.txt /usr/share/cmake-3.28/Modules/CMakeCInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Compiler/GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /usr/share/cmake-3.28/Modules/Platform/Linux.cmake /usr/share/cmake-3.28/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.28.3/CMakeCCompiler.cmake CMakeFiles/3.28.3/CMakeCXXCompiler.cmake CMakeFiles/3.28.3/CMakeSystem.cmake: phony
 
 
 #############################################
