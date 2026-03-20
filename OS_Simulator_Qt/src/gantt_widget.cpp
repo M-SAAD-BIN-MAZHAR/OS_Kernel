@@ -29,7 +29,7 @@ void GanttWidget::setupChart() {
     
     axisY = new QValueAxis();
     axisY->setLabelFormat("%i ms");
-    axisY->setRange(0, 20);
+    axisY->setRange(0, displayedAxisMax);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
     
@@ -44,25 +44,23 @@ void GanttWidget::updateGanttChart(const std::vector<ProcessSchedule> &schedule)
     
     QStringList categories;
     int maxTime = 0;
-    
-    // Collect all process names and find max time
+
+    // One bar set aligned with categories is more reliable for Qt bar rendering.
+    auto *durations = new QBarSet("CPU Slice");
+    durations->setColor(QColor(76, 175, 80));
+
     for (const auto &process : schedule) {
-        if (std::find(categories.begin(), categories.end(), 
-                     QString::fromStdString(process.processName)) == categories.end()) {
-            categories.append(QString::fromStdString(process.processName));
-        }
+        const int duration = std::max(0, process.endTime - process.startTime);
+        categories.append(QString::fromStdString(process.processName) +
+                          QString(" [%1-%2]").arg(process.startTime).arg(process.endTime));
+        *durations << duration;
         maxTime = std::max(maxTime, process.endTime);
     }
     
     axisX->setCategories(categories);
-    if (axisY) {
-        axisY->setRange(0, maxTime + 5);
-    }
-    
-    // Create bars for each process based on their duration
-    for (const auto &process : schedule) {
-        addScheduleBar(process.processName, process.startTime, process.endTime, process.state);
-    }
+    animateAxisMax(maxTime + 5);
+
+    series->append(durations);
 }
 
 void GanttWidget::clearChart() {
@@ -74,25 +72,42 @@ void GanttWidget::clearChart() {
     }
 }
 
-void GanttWidget::addScheduleBar(const std::string &processName, int startTime, int endTime, const std::string &state) {
-    if (!series) return;
-    
-    int duration = endTime - startTime;
-    
-    QBarSet *set = new QBarSet(QString::fromStdString(processName) +
-                              QString(" [%1-%2ms]").arg(startTime).arg(endTime));
-    
-    // Color by state
-    if (state == "RUNNING") {
-        set->setColor(QColor(76, 175, 80));  // Green
-    } else if (state == "READY") {
-        set->setColor(QColor(33, 150, 243)); // Blue
-    } else if (state == "BLOCKED") {
-        set->setColor(QColor(255, 193, 7));  // Yellow
-    } else {
-        set->setColor(QColor(200, 200, 200)); // Gray
+void GanttWidget::animateAxisMax(int targetMax) {
+    if (!axisY) {
+        return;
     }
-    
-    *set << duration;
-    series->append(set);
+
+    targetMax = std::max(5, targetMax);
+    const int currentMax = static_cast<int>(axisY->max());
+    displayedAxisMax = currentMax;
+
+    if (targetMax == displayedAxisMax) {
+        return;
+    }
+
+    if (axisAnimation) {
+        axisAnimation->stop();
+        axisAnimation->deleteLater();
+        axisAnimation = nullptr;
+    }
+
+    axisAnimation = new QVariantAnimation(this);
+    axisAnimation->setDuration(280);
+    axisAnimation->setStartValue(displayedAxisMax);
+    axisAnimation->setEndValue(targetMax);
+    axisAnimation->setEasingCurve(QEasingCurve::OutCubic);
+
+    connect(axisAnimation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
+        axisY->setRange(0, value.toInt());
+    });
+
+    connect(axisAnimation, &QVariantAnimation::finished, this, [this, targetMax]() {
+        displayedAxisMax = targetMax;
+        if (axisAnimation) {
+            axisAnimation->deleteLater();
+            axisAnimation = nullptr;
+        }
+    });
+
+    axisAnimation->start();
 }

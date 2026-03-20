@@ -19,6 +19,7 @@ public:
     // Send commands to engine
     void selectScheduler(const QString &algorithm);
     void startSimulation();
+    void startSyncDemo(const QString &demo);
 
 signals:
     void connected();
@@ -38,4 +39,5 @@ private:
     std::unique_ptr<QTcpSocket> socket;
     QString host;
     quint16 port;
+    QString receiveBuffer;
 };

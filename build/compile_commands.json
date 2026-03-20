@@ -70,5 +70,11 @@
   "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/network/SchedulerStateJSON.cpp",
   "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/network/SchedulerStateJSON.cpp",
   "output": "CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o"
+},
+{
+  "directory": "/home/msaad/OS_Simulator1/build",
+  "command": "/usr/bin/g++ -I/home/msaad/OS_Simulator1/OS_Kernel/src -g -o CMakeFiles/simulator.dir/src/sync/SyncDemoRunner.cpp.o -c /home/msaad/OS_Simulator1/OS_Kernel/src/sync/SyncDemoRunner.cpp",
+  "file": "/home/msaad/OS_Simulator1/OS_Kernel/src/sync/SyncDemoRunner.cpp",
+  "output": "CMakeFiles/simulator.dir/src/sync/SyncDemoRunner.cpp.o"
 }
 ]

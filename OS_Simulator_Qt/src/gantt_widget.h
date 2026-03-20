@@ -5,6 +5,7 @@
 #include <QBarCategoryAxis>
 #include <QValueAxis>
 #include <QBarSet>
+#include <QVariantAnimation>
 #include <vector>
 #include <string>
 
@@ -27,9 +28,11 @@ public:
 
 private:
     void setupChart();
-    void addScheduleBar(const std::string &processName, int startTime, int endTime, const std::string &state);
+    void animateAxisMax(int targetMax);
     
     QBarSeries *series;
     QBarCategoryAxis *axisX;
     QValueAxis *axisY;
+    int displayedAxisMax = 20;
+    QVariantAnimation *axisAnimation = nullptr;
 };

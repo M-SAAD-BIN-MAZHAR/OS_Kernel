@@ -24,12 +24,16 @@ set(SOURCES
     src/simulator_client.cpp
     src/main_window.cpp
     src/gantt_widget.cpp
+    src/sync_timeline_widget.cpp
+    src/philosophers_widget.cpp
 )
 
 set(HEADERS
     src/simulator_client.h
     src/main_window.h
     src/gantt_widget.h
+    src/sync_timeline_widget.h
+    src/philosophers_widget.h
 )
 
 # Create executable

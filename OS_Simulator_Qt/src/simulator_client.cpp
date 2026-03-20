@@ -46,9 +46,16 @@ void SimulatorClient::startSimulation() {
     sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 }
 
+void SimulatorClient::startSyncDemo(const QString &demo) {
+    QJsonObject obj;
+    obj["command"] = "start_sync_demo";
+    obj["demo"] = demo;
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
 void SimulatorClient::sendCommand(const QString &command) {
     if (socket && socket->isOpen()) {
-        socket->write(command.toUtf8());
+        socket->write((command + "\n").toUtf8());
         socket->flush();
     }
 }
@@ -65,13 +72,19 @@ void SimulatorClient::onDisconnected() {
 
 void SimulatorClient::onReadyRead() {
     if (!socket) return;
-    
-    QByteArray data = socket->readAll();
-    QString jsonData = QString::fromUtf8(data).trimmed();
-    
-    if (!jsonData.isEmpty()) {
-        std::cout << "Received JSON: " << jsonData.toStdString() << std::endl;
-        emit dataReceived(jsonData);
+
+    receiveBuffer.append(QString::fromUtf8(socket->readAll()));
+
+    int newline = receiveBuffer.indexOf('\n');
+    while (newline >= 0) {
+        const QString message = receiveBuffer.left(newline).trimmed();
+        receiveBuffer.remove(0, newline + 1);
+
+        if (!message.isEmpty()) {
+            std::cout << "Received JSON: " << message.toStdString() << std::endl;
+            emit dataReceived(message);
+        }
+        newline = receiveBuffer.indexOf('\n');
     }
 }
 

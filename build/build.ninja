@@ -133,6 +133,13 @@ build CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o: CXX_COMPILE
   OBJECT_DIR = CMakeFiles/simulator.dir
   OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/network
 
+build CMakeFiles/simulator.dir/src/sync/SyncDemoRunner.cpp.o: CXX_COMPILER__simulator_unscanned_Debug /home/msaad/OS_Simulator1/OS_Kernel/src/sync/SyncDemoRunner.cpp || cmake_object_order_depends_target_simulator
+  DEP_FILE = CMakeFiles/simulator.dir/src/sync/SyncDemoRunner.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/msaad/OS_Simulator1/OS_Kernel/src
+  OBJECT_DIR = CMakeFiles/simulator.dir
+  OBJECT_FILE_DIR = CMakeFiles/simulator.dir/src/sync
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target simulator
@@ -141,7 +148,7 @@ build CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o: CXX_COMPILE
 #############################################
 # Link the executable simulator
 
-build simulator: CXX_EXECUTABLE_LINKER__simulator_Debug CMakeFiles/simulator.dir/src/main.cpp.o CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o CMakeFiles/simulator.dir/src/utils/Config.cpp.o CMakeFiles/simulator.dir/src/utils/Logger.cpp.o CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o
+build simulator: CXX_EXECUTABLE_LINKER__simulator_Debug CMakeFiles/simulator.dir/src/main.cpp.o CMakeFiles/simulator.dir/src/process/ProcessManager.cpp.o CMakeFiles/simulator.dir/src/process/StateTransition.cpp.o CMakeFiles/simulator.dir/src/process/ThreadManager.cpp.o CMakeFiles/simulator.dir/src/utils/Config.cpp.o CMakeFiles/simulator.dir/src/utils/Logger.cpp.o CMakeFiles/simulator.dir/src/scheduler/FCFS.cpp.o CMakeFiles/simulator.dir/src/scheduler/RoundRobin.cpp.o CMakeFiles/simulator.dir/src/scheduler/Priority.cpp.o CMakeFiles/simulator.dir/src/scheduler/Metrics.cpp.o CMakeFiles/simulator.dir/src/network/TCPServer.cpp.o CMakeFiles/simulator.dir/src/network/SchedulerStateJSON.cpp.o CMakeFiles/simulator.dir/src/sync/SyncDemoRunner.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lpthread
   OBJECT_DIR = CMakeFiles/simulator.dir
