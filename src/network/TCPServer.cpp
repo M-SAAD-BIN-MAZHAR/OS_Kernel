@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <cstring>
 #include <algorithm>
+#include <sstream>
 
 TCPServer::TCPServer(int port) : port(port) {}
 
@@ -28,10 +29,13 @@ void TCPServer::stop() {
     isRunning = false;
     
     // Close all client sockets
-    for (int clientSocket : clientSockets) {
-        close(clientSocket);
+    {
+        std::lock_guard<std::mutex> lock(clientMutex);
+        for (int clientSocket : clientSockets) {
+            close(clientSocket);
+        }
+        clientSockets.clear();
     }
-    clientSockets.clear();
     
     // Close server socket
     if (serverSocket != -1) {
@@ -94,14 +98,20 @@ void TCPServer::acceptConnections() {
         }
         
         Logger::info("New client connected from " + std::string(inet_ntoa(clientAddr.sin_addr)));
-        clientSockets.push_back(clientSocket);
+        {
+            std::lock_guard<std::mutex> lock(clientMutex);
+            clientSockets.push_back(clientSocket);
+        }
+
+        std::thread clientThread(&TCPServer::handleClient, this, clientSocket);
+        clientThread.detach();
     }
 }
 
 void TCPServer::broadcastMessage(const std::string &message) {
     std::string msg = message + "\n";
-    
-    // Remove disconnected clients
+
+    std::lock_guard<std::mutex> lock(clientMutex);
     clientSockets.erase(
         std::remove_if(clientSockets.begin(), clientSockets.end(),
             [&msg](int socket) {
@@ -111,6 +121,40 @@ void TCPServer::broadcastMessage(const std::string &message) {
                 }
                 return false;
             }),
-        clientSockets.end()
-    );
+        clientSockets.end());
+}
+
+void TCPServer::setMessageHandler(std::function<void(const std::string &)> handler) {
+    messageHandler = std::move(handler);
+}
+
+void TCPServer::handleClient(int clientSocket) {
+    constexpr int kBufferSize = 1024;
+    char buffer[kBufferSize];
+    std::string pending;
+
+    while (isRunning) {
+        const int bytesRead = recv(clientSocket, buffer, kBufferSize - 1, 0);
+        if (bytesRead <= 0) {
+            break;
+        }
+
+        buffer[bytesRead] = '\0';
+        pending.append(buffer);
+
+        std::size_t newlinePos = std::string::npos;
+        while ((newlinePos = pending.find('\n')) != std::string::npos) {
+            std::string message = pending.substr(0, newlinePos);
+            pending.erase(0, newlinePos + 1);
+
+            if (!message.empty() && messageHandler) {
+                messageHandler(message);
+            }
+        }
+    }
+
+    close(clientSocket);
+
+    std::lock_guard<std::mutex> lock(clientMutex);
+    clientSockets.erase(std::remove(clientSockets.begin(), clientSockets.end(), clientSocket), clientSockets.end());
 }

@@ -13,8 +13,7 @@ void ProcessManager::createProcess(string name, int burst, int priority) {
     p.state = ProcessState::NEW;
 
     processes.push_back(p);
-
-    // 🔥 Logger added
+ 
     Logger::info("Process Created -> PID: " + to_string(p.pid) +
                  " Name: " + p.name);
 }

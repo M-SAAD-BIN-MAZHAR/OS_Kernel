@@ -7,7 +7,11 @@
 #include <string>
 #include <filesystem>
 #include <vector>
+#include <memory>
+#include <csignal>
 #include "utils/Config.h"
+#include "utils/Logger.h"
+#include "utils/json.hpp"
 #include "process/ProcessManager.h"
 #include "process/StateTransition.h"
 #include "process/ThreadManager.h"
@@ -17,11 +21,18 @@
 #include "scheduler/Metrics.h"
 #include "network/TCPServer.h"
 #include "network/SchedulerStateJSON.h"
+#include "sync/SyncDemoRunner.h"
+
+using json = nlohmann::json;
 
 std::mutex algoMutex;
 std::string currentAlgorithm = "";
 std::atomic<bool> simulationStarted = false;
 std::atomic<bool> shouldExit = false;
+
+void handleShutdownSignal(int) {
+    shouldExit = true;
+}
 
 std::string resolveConfigPath() {
     const std::vector<std::string> candidates = {
@@ -60,7 +71,7 @@ void runScheduler(Scheduler& scheduler, std::vector<PCB> processes) {
     MetricsEngine::exportCSV(processes, summary, scheduler.name());
 }
 
-void simulationThread(TCPServer &server) {
+void simulationThread(TCPServer &server, SyncDemoRunner &syncRunner) {
     ProcessManager pm;
 
     // Create test processes with custom arrival times
@@ -107,16 +118,22 @@ void simulationThread(TCPServer &server) {
                 
                 delete scheduler;
             }
-            
-            // Wait 200ms before next broadcast
-            std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        } else {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
+
+        syncRunner.tick();
+        const std::string syncJson = syncRunner.buildJSONSnapshot();
+        server.broadcastMessage(syncJson);
+        std::cout << "Sent sync data (" << syncJson.length() << " bytes)\n";
+
+        // Wait 200ms before next broadcast
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 }
 
 int main() {
+    std::signal(SIGINT, handleShutdownSignal);
+    std::signal(SIGTERM, handleShutdownSignal);
+
     // --- Phase 0: ProcessManager ---
     ProcessManager pm;
     Config::load(resolveConfigPath());
@@ -157,11 +174,37 @@ int main() {
     
     // --- Phase 1: TCP Server + Simulation ---
     std::cout << "\n\n===== PHASE 1: CPU SCHEDULING WITH TCP SERVER =====\n";
+    std::cout << "===== PHASE 2: PROCESS SYNCHRONIZATION DEMOS =====\n";
+
+    SyncDemoRunner syncRunner;
     TCPServer server(9000);
+
+    server.setMessageHandler([&](const std::string &message) {
+        try {
+            const json payload = json::parse(message);
+            const std::string command = payload.value("command", "");
+
+            if (command == "select_scheduler") {
+                std::lock_guard<std::mutex> lock(algoMutex);
+                currentAlgorithm = payload.value("algorithm", "FCFS");
+                Logger::info("Selected scheduler: " + currentAlgorithm);
+            } else if (command == "start_simulation") {
+                simulationStarted = true;
+                Logger::info("Simulation start command received");
+            } else if (command == "start_sync_demo") {
+                const std::string demo = payload.value("demo", "producer_consumer");
+                syncRunner.startDemo(demo);
+                Logger::info("Sync demo started: " + demo);
+            }
+        } catch (const std::exception &ex) {
+            Logger::warn(std::string("Invalid command payload: ") + ex.what());
+        }
+    });
+
     server.start();
 
     // Start simulation thread
-    std::thread simThread(simulationThread, std::ref(server));
+    std::thread simThread(simulationThread, std::ref(server), std::ref(syncRunner));
 
     // Set default scheduler
     {
@@ -170,12 +213,15 @@ int main() {
     }
     simulationStarted = true;
 
-    // Run for 5 minutes
-    std::this_thread::sleep_for(std::chrono::seconds(300));
+    // Keep server alive until interrupted (Ctrl+C / termination signal)
+    while (!shouldExit) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 
     // Shutdown
     std::cout << "\n\nShutting down server...\n";
     shouldExit = true;
+    syncRunner.stop();
     server.stop();
     simThread.join();
 

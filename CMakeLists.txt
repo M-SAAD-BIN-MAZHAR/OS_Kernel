@@ -20,6 +20,8 @@ add_executable(simulator
     
     src/network/TCPServer.cpp
     src/network/SchedulerStateJSON.cpp
+
+    src/sync/SyncDemoRunner.cpp
 )
 
 target_link_libraries(simulator PRIVATE pthread)
