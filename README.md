@@ -16,6 +16,7 @@ GitHub does not execute interactive HTML in repository view, so opening `graphif
 
 Live interactive graph (GitHub Pages):
 
+- https://m-saad-bin-mazhar.github.io/OS_Kernel/
 - https://m-saad-bin-mazhar.github.io/OS_Kernel/graph.html
 - Fallback preview (works even before Pages finishes provisioning):
   https://htmlpreview.github.io/?https://raw.githubusercontent.com/M-SAAD-BIN-MAZHAR/OS_Kernel/main/graphify-out/graph.html
