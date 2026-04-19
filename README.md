@@ -10,6 +10,21 @@ A C++/Qt6 operating-systems simulator with live scheduling and synchronization v
 - Phase 4 complete: virtual memory management with paging, TLB, FIFO/LRU/Optimal page replacement, memory metrics UI tab.
 - Phase 5 complete: integrated simulator and evaluation artifacts for the final demo.
 
+## Graph Visualization on GitHub
+
+GitHub does not execute interactive HTML in repository view, so opening `graphify-out/graph.html` in the repo often shows source text instead of an interactive diagram.
+
+Use the static SVG below for GitHub preview:
+
+![Knowledge Graph](graphify-out/graph.svg)
+
+Graph artifacts:
+
+- Static diagram (GitHub-friendly): `graphify-out/graph.svg`
+- Interactive graph (open locally in browser): `graphify-out/graph.html`
+- Graph data: `graphify-out/graph.json`
+- Audit report: `graphify-out/GRAPH_REPORT.md`
+
 ## Architecture
 
 - Engine: `OS_Kernel` (C++17, TCP server on port `9000`)
