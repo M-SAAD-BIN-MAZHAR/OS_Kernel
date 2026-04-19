@@ -8,6 +8,7 @@ A C++/Qt6 operating-systems simulator with live scheduling and synchronization v
 - Phase 1 complete: FCFS/RoundRobin/Priority schedulers, metrics engine, TCP JSON stream, Qt Gantt/metrics UI.
 - Phase 2 complete: synchronization demos (mutex, semaphore, producer-consumer, philosophers, race condition) + synchronization UI tab.
 - Phase 4 complete: virtual memory management with paging, TLB, FIFO/LRU/Optimal page replacement, memory metrics UI tab.
+- Phase 5 complete: integrated simulator and evaluation artifacts for the final demo.
 
 ## Architecture
 
