@@ -14,6 +14,10 @@ A C++/Qt6 operating-systems simulator with live scheduling and synchronization v
 
 GitHub does not execute interactive HTML in repository view, so opening `graphify-out/graph.html` in the repo often shows source text instead of an interactive diagram.
 
+Live interactive graph (GitHub Pages):
+
+- https://m-saad-bin-mazhar.github.io/OS_Kernel/graph.html
+
 Use the static SVG below for GitHub preview:
 
 ![Knowledge Graph](graphify-out/graph.svg)
