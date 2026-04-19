@@ -7,6 +7,7 @@ A C++/Qt6 operating-systems simulator with live scheduling and synchronization v
 - Phase 0 complete: environment, PCB/TCB, state transitions, config, logger.
 - Phase 1 complete: FCFS/RoundRobin/Priority schedulers, metrics engine, TCP JSON stream, Qt Gantt/metrics UI.
 - Phase 2 complete: synchronization demos (mutex, semaphore, producer-consumer, philosophers, race condition) + synchronization UI tab.
+- Phase 4 complete: virtual memory management with paging, TLB, FIFO/LRU/Optimal page replacement, memory metrics UI tab.
 
 ## Architecture
 
@@ -34,6 +35,13 @@ A C++/Qt6 operating-systems simulator with live scheduling and synchronization v
   - Producer-Consumer
   - Dining Philosophers (deadlock + safe)
   - Race condition (with/without mutex)
+- Memory management:
+  - Virtual paging with configurable page size
+  - TLB (Translation Lookaside Buffer) with LRU replacement
+  - Three page replacement algorithms: FIFO, LRU, Optimal
+  - Real-time metrics: page fault rate, TLB hit rate, memory utilization
+  - Address translation (logical → physical)
+  - Frame and page table visualization
 - Networking:
   - TCP server on port 9000
   - Newline-delimited JSON stream for scheduler and sync state

@@ -20,6 +20,11 @@ public:
     void selectScheduler(const QString &algorithm);
     void startSimulation();
     void startSyncDemo(const QString &demo);
+    void startDeadlockDemo(const QString &scenario);
+    void stopDeadlockDemo();
+    void selectMemoryPolicy(const QString &policy);
+    void configureMemory(int pageSize, int frameCount, int tlbSize = 8);
+    void startMemorySimulation();
 
 signals:
     void connected();

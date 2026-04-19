@@ -3,6 +3,7 @@
 #include "gantt_widget.h"
 #include "sync_timeline_widget.h"
 #include "philosophers_widget.h"
+#include "deadlock_widget.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -18,9 +19,11 @@
 #include <QTimer>
 #include <QListWidgetItem>
 #include <QFrame>
+#include <QFormLayout>
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
+#include <QSpinBox>
 #include <QVariantAnimation>
 #include <QResizeEvent>
 #include <QTimer>
@@ -96,7 +99,7 @@ void MainWindow::setupUI() {
     });
     topRow->addWidget(themeCombo);
 
-    auto *subtitle = new QLabel("Live CPU scheduling, synchronization telemetry, and process analytics", titleCard);
+    auto *subtitle = new QLabel("Live CPU scheduling, synchronization telemetry, memory paging, and process analytics", titleCard);
     subtitle->setObjectName("dashboardSubtitle");
 
     titleLayout->addLayout(topRow);
@@ -111,6 +114,8 @@ void MainWindow::setupUI() {
     createSchedulerTab();
     createMetricsTab();
     createSynchronizationTab();
+    createDeadlockTab();
+    createMemoryTab();
     createLogsTab();
     createAboutTab();
     
@@ -299,6 +304,181 @@ void MainWindow::createSynchronizationTab() {
     tabWidget->addTab(tab, "Synchronization");
 }
 
+void MainWindow::createDeadlockTab() {
+    QWidget *tab = new QWidget();
+    QVBoxLayout *layout = new QVBoxLayout(tab);
+    layout->setContentsMargins(8, 8, 8, 8);
+    layout->setSpacing(10);
+
+    auto *deadlockCard = new QFrame(tab);
+    deadlockCard->setObjectName("panelCard");
+    auto *deadlockLayout = new QVBoxLayout(deadlockCard);
+    deadlockLayout->setContentsMargins(10, 10, 10, 10);
+
+    deadlockWidget = new DeadlockWidget();
+    deadlockLayout->addWidget(deadlockWidget);
+
+    connect(deadlockWidget, &DeadlockWidget::startDemoRequested, this, [this](const QString &scenario) {
+        if (!client || !client->isConnected()) {
+            addLog("Error: Not connected to server");
+            return;
+        }
+
+        client->startDeadlockDemo(scenario);
+        addLog("Started deadlock demo: " + scenario);
+    });
+
+    connect(deadlockWidget, &DeadlockWidget::stopDemoRequested, this, [this]() {
+        if (!client || !client->isConnected()) {
+            addLog("Error: Not connected to server");
+            return;
+        }
+
+        client->stopDeadlockDemo();
+        addLog("Stopped deadlock demo");
+    });
+
+    layout->addWidget(deadlockCard);
+    animatedCards.append(deadlockCard);
+    tabWidget->addTab(tab, "Deadlock");
+}
+
+void MainWindow::createMemoryTab() {
+    QWidget *tab = new QWidget();
+    QVBoxLayout *layout = new QVBoxLayout(tab);
+    layout->setContentsMargins(8, 8, 8, 8);
+    layout->setSpacing(10);
+
+    auto *controlsCard = new QFrame(tab);
+    controlsCard->setObjectName("panelCard");
+    auto *controlsLayout = new QHBoxLayout(controlsCard);
+    controlsLayout->setContentsMargins(12, 10, 12, 10);
+    controlsLayout->addWidget(new QLabel("Policy:"));
+
+    memoryPolicyCombo = new QComboBox();
+    memoryPolicyCombo->addItems({"FIFO", "LRU", "Optimal"});
+    controlsLayout->addWidget(memoryPolicyCombo);
+
+    controlsLayout->addWidget(new QLabel("Frames:"));
+    memoryFrameCountSpin = new QSpinBox();
+    memoryFrameCountSpin->setRange(1, 128);
+    memoryFrameCountSpin->setValue(16);
+    controlsLayout->addWidget(memoryFrameCountSpin);
+
+    controlsLayout->addWidget(new QLabel("Page Size:"));
+    memoryPageSizeSpin = new QSpinBox();
+    memoryPageSizeSpin->setRange(256, 16384);
+    memoryPageSizeSpin->setSingleStep(256);
+    memoryPageSizeSpin->setValue(4096);
+    controlsLayout->addWidget(memoryPageSizeSpin);
+
+    startMemoryButton = new QPushButton("Start Memory Simulation");
+    startMemoryButton->setObjectName("primaryButton");
+    connect(startMemoryButton, &QPushButton::clicked, this, [this]() {
+        if (!client || !client->isConnected()) {
+            addLog("Error: Not connected to server");
+            return;
+        }
+
+        client->selectMemoryPolicy(memoryPolicyCombo->currentText());
+        client->configureMemory(memoryPageSizeSpin->value(), memoryFrameCountSpin->value(), 8);
+        client->startMemorySimulation();
+        addLog("Started memory simulation: " + memoryPolicyCombo->currentText());
+    });
+    connect(startMemoryButton, &QPushButton::clicked, this, [this]() { playButtonPulse(startMemoryButton); });
+    controlsLayout->addWidget(startMemoryButton);
+    controlsLayout->addStretch();
+    layout->addWidget(controlsCard);
+    animatedCards.append(controlsCard);
+
+    auto *summaryCard = new QFrame(tab);
+    summaryCard->setObjectName("panelCard");
+    auto *summaryLayout = new QHBoxLayout(summaryCard);
+    summaryLayout->setContentsMargins(12, 10, 12, 10);
+    summaryLayout->setSpacing(14);
+
+    auto makeMetricTile = [&](const QString &titleText, QLabel **valueLabel) {
+        auto *tile = new QFrame(summaryCard);
+        tile->setObjectName("metricTile");
+        auto *tileLayout = new QVBoxLayout(tile);
+        tileLayout->setContentsMargins(10, 8, 10, 8);
+        auto *title = new QLabel(titleText, tile);
+        title->setObjectName("metricTitle");
+        *valueLabel = new QLabel("--", tile);
+        (*valueLabel)->setObjectName("metricValue");
+        tileLayout->addWidget(title);
+        tileLayout->addWidget(*valueLabel);
+        summaryLayout->addWidget(tile);
+    };
+
+    makeMetricTile("Page Fault Rate", &pageFaultRateValue);
+    makeMetricTile("TLB Hit Rate", &tlbHitRateValue);
+    makeMetricTile("Memory Utilization", &memoryUtilizationValue);
+    layout->addWidget(summaryCard);
+    animatedCards.append(summaryCard);
+
+    auto *translationCard = new QFrame(tab);
+    translationCard->setObjectName("panelCard");
+    auto *translationLayout = new QFormLayout(translationCard);
+    translationLayout->setContentsMargins(14, 12, 14, 12);
+    memoryAccessValue = new QLabel("No memory access yet");
+    memoryTranslationValue = new QLabel("Waiting for translation");
+    memoryTotalsValue = new QLabel("Accesses=0 Faults=0 TLB Hits=0");
+    translationLayout->addRow("Current Access", memoryAccessValue);
+    translationLayout->addRow("Translation", memoryTranslationValue);
+    translationLayout->addRow("Totals", memoryTotalsValue);
+    layout->addWidget(translationCard);
+    animatedCards.append(translationCard);
+
+    auto *tablesRow = new QHBoxLayout();
+
+    auto *frameCard = new QFrame(tab);
+    frameCard->setObjectName("panelCard");
+    auto *frameLayout = new QVBoxLayout(frameCard);
+    frameLayout->setContentsMargins(10, 10, 10, 10);
+    auto *frameTitle = new QLabel("Physical Frames");
+    frameTitle->setObjectName("sectionTitle");
+    frameLayout->addWidget(frameTitle);
+    memoryFrameTable = new QTableWidget();
+    memoryFrameTable->setColumnCount(4);
+    memoryFrameTable->setHorizontalHeaderLabels({"Frame", "VPN", "Occupied", "Last Access"});
+    memoryFrameTable->horizontalHeader()->setStretchLastSection(true);
+    memoryFrameTable->verticalHeader()->setVisible(false);
+    memoryFrameTable->setShowGrid(false);
+    frameLayout->addWidget(memoryFrameTable);
+    tablesRow->addWidget(frameCard);
+    animatedCards.append(frameCard);
+
+    auto *pageTableCard = new QFrame(tab);
+    pageTableCard->setObjectName("panelCard");
+    auto *pageTableLayout = new QVBoxLayout(pageTableCard);
+    pageTableLayout->setContentsMargins(10, 10, 10, 10);
+    auto *pageTableTitle = new QLabel("Page Table");
+    pageTableTitle->setObjectName("sectionTitle");
+    pageTableLayout->addWidget(pageTableTitle);
+    memoryPageTable = new QTableWidget();
+    memoryPageTable->setColumnCount(4);
+    memoryPageTable->setHorizontalHeaderLabels({"VPN", "Frame", "Valid", "Last Access"});
+    memoryPageTable->horizontalHeader()->setStretchLastSection(true);
+    memoryPageTable->verticalHeader()->setVisible(false);
+    memoryPageTable->setShowGrid(false);
+    pageTableLayout->addWidget(memoryPageTable);
+    tablesRow->addWidget(pageTableCard);
+    animatedCards.append(pageTableCard);
+
+    layout->addLayout(tablesRow);
+
+    auto *logTitle = new QLabel("Memory Events");
+    logTitle->setObjectName("sectionTitle");
+    layout->addWidget(logTitle);
+    memoryEventList = new QListWidget();
+    memoryEventList->setMinimumHeight(130);
+    layout->addWidget(memoryEventList);
+    animatedCards.append(memoryEventList);
+
+    tabWidget->addTab(tab, "Memory");
+}
+
 void MainWindow::createLogsTab() {
     QWidget *tab = new QWidget();
     QVBoxLayout *layout = new QVBoxLayout(tab);
@@ -321,9 +501,10 @@ void MainWindow::createAboutTab() {
     aboutLayout->setContentsMargins(18, 14, 18, 14);
 
     auto *about = new QLabel("OS Process Scheduler Simulator v1.0\n\n"
-                             "Advanced simulator for CPU scheduling, process synchronization, and runtime analytics.\n\n"
+                             "Advanced simulator for CPU scheduling, process synchronization, memory paging, and runtime analytics.\n\n"
                              "Algorithms: FCFS, Round Robin, Priority\n"
-                             "Synchronization Demos: Producer-Consumer, Dining Philosophers, Race Condition\n\n"
+                             "Synchronization Demos: Producer-Consumer, Dining Philosophers, Race Condition\n"
+                             "Memory Policies: FIFO, LRU, Optimal with TLB + paging metrics\n\n"
                              "© 2026");
     about->setWordWrap(true);
     aboutLayout->addWidget(about);
@@ -380,6 +561,10 @@ void MainWindow::onDataReceived(const QString &data) {
 
     if (messageType == "sync") {
         updateSynchronizationTab(jsonData);
+    } else if (messageType == "deadlock") {
+        updateDeadlockTab(jsonData);
+    } else if (messageType == "memory") {
+        updateMemoryTab(jsonData);
     } else {
         updateGanttChart(jsonData);
         updateMetricsTable(jsonData);
@@ -537,6 +722,85 @@ void MainWindow::updateSynchronizationTab(const QJsonObject &jsonData) {
                                      .arg(noMutex)
                                      .arg(withMutex)
                                      .arg(target));
+    }
+}
+
+void MainWindow::updateDeadlockTab(const QJsonObject &jsonData) {
+    if (deadlockWidget) {
+        deadlockWidget->updateDeadlockData(jsonData);
+    }
+}
+
+void MainWindow::updateMemoryTab(const QJsonObject &jsonData) {
+    const QJsonObject translation = jsonData.value("translation").toObject();
+    const QJsonObject metrics = jsonData.value("metrics").toObject();
+    const QJsonObject currentAccess = jsonData.value("currentAccess").toObject();
+
+    memoryAccessValue->setText(QString("index=%1 logical=%2")
+                                   .arg(currentAccess.value("accessIndex").toInt())
+                                   .arg(QString::number(currentAccess.value("logicalAddress").toInt())));
+
+    memoryTranslationValue->setText(
+        QString("VPN=%1 offset=%2 frame=%3 physical=%4 | TLB %5 | %6")
+            .arg(translation.value("vpn").toInt())
+            .arg(translation.value("offset").toInt())
+            .arg(translation.value("frame").toInt(-1))
+            .arg(QString::number(translation.value("physicalAddress").toInt()))
+            .arg(translation.value("tlbHit").toBool() ? "hit" : "miss")
+            .arg(translation.value("pageFault").toBool() ? "page fault" : "page hit"));
+
+    animateMetricLabel(pageFaultRateValue, metrics.value("pageFaultRate").toDouble(), 2, "%");
+    animateMetricLabel(tlbHitRateValue, metrics.value("tlbHitRate").toDouble(), 2, "%");
+    animateMetricLabel(memoryUtilizationValue, metrics.value("memoryUtilization").toDouble(), 2, "%");
+    memoryTotalsValue->setText(QString("Accesses=%1 Faults=%2 TLB Hits=%3")
+                                   .arg(metrics.value("totalAccesses").toInt())
+                                   .arg(metrics.value("totalFaults").toInt())
+                                   .arg(metrics.value("totalTlbHits").toInt()));
+
+    memoryFrameTable->setRowCount(0);
+    const QJsonArray frames = jsonData.value("frames").toArray();
+    for (int i = 0; i < frames.size(); ++i) {
+        const QJsonObject frame = frames.at(i).toObject();
+        memoryFrameTable->insertRow(i);
+        memoryFrameTable->setItem(i, 0, new QTableWidgetItem(QString::number(frame.value("index").toInt())));
+        memoryFrameTable->setItem(i, 1, new QTableWidgetItem(QString::number(frame.value("vpn").toInt(-1))));
+        memoryFrameTable->setItem(i, 2, new QTableWidgetItem(frame.value("occupied").toBool() ? "Yes" : "No"));
+        memoryFrameTable->setItem(i, 3, new QTableWidgetItem(QString::number(frame.value("lastAccessTick").toInt(-1))));
+    }
+
+    memoryPageTable->setRowCount(0);
+    const QJsonArray pageTable = jsonData.value("pageTable").toArray();
+    for (int i = 0; i < pageTable.size(); ++i) {
+        const QJsonObject entry = pageTable.at(i).toObject();
+        memoryPageTable->insertRow(i);
+        memoryPageTable->setItem(i, 0, new QTableWidgetItem(QString::number(entry.value("vpn").toInt())));
+        memoryPageTable->setItem(i, 1, new QTableWidgetItem(QString::number(entry.value("frame").toInt(-1))));
+        memoryPageTable->setItem(i, 2, new QTableWidgetItem(entry.value("valid").toBool() ? "Yes" : "No"));
+        memoryPageTable->setItem(i, 3, new QTableWidgetItem(QString::number(entry.value("lastAccessTick").toInt(-1))));
+    }
+
+    memoryEventList->clear();
+    const QJsonArray events = jsonData.value("events").toArray();
+    for (const QJsonValue &value : events) {
+        if (!value.isObject()) {
+            continue;
+        }
+        const QJsonObject event = value.toObject();
+        const QString text = QString("t=%1 | %2 | vpn=%3 frame=%4 | %5")
+                                 .arg(event.value("tick").toInt())
+                                 .arg(event.value("action").toString() + ":" + event.value("status").toString())
+                                 .arg(event.value("vpn").toInt(-1))
+                                 .arg(event.value("frame").toInt(-1))
+                                 .arg(event.value("detail").toString());
+        auto *item = new QListWidgetItem(text);
+        if (event.value("status").toString().contains("fault", Qt::CaseInsensitive)) {
+            item->setForeground(QColor("#dc2626"));
+        } else if (event.value("status").toString().contains("hit", Qt::CaseInsensitive)) {
+            item->setForeground(QColor("#16a34a"));
+        } else if (event.value("action").toString().contains("replace", Qt::CaseInsensitive)) {
+            item->setForeground(QColor("#2563eb"));
+        }
+        memoryEventList->addItem(item);
     }
 }
 

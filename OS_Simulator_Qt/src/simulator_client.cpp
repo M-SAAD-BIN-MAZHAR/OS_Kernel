@@ -53,6 +53,41 @@ void SimulatorClient::startSyncDemo(const QString &demo) {
     sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 }
 
+void SimulatorClient::startDeadlockDemo(const QString &scenario) {
+    QJsonObject obj;
+    obj["command"] = "start_deadlock_demo";
+    obj["scenario"] = scenario;
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
+void SimulatorClient::stopDeadlockDemo() {
+    QJsonObject obj;
+    obj["command"] = "stop_deadlock_demo";
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
+void SimulatorClient::selectMemoryPolicy(const QString &policy) {
+    QJsonObject obj;
+    obj["command"] = "select_memory_policy";
+    obj["policy"] = policy;
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
+void SimulatorClient::configureMemory(int pageSize, int frameCount, int tlbSize) {
+    QJsonObject obj;
+    obj["command"] = "configure_memory";
+    obj["pageSize"] = pageSize;
+    obj["frameCount"] = frameCount;
+    obj["tlbSize"] = tlbSize;
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
+void SimulatorClient::startMemorySimulation() {
+    QJsonObject obj;
+    obj["command"] = "start_memory_simulation";
+    sendCommand(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+}
+
 void SimulatorClient::sendCommand(const QString &command) {
     if (socket && socket->isOpen()) {
         socket->write((command + "\n").toUtf8());

@@ -26,6 +26,7 @@ set(SOURCES
     src/gantt_widget.cpp
     src/sync_timeline_widget.cpp
     src/philosophers_widget.cpp
+    src/deadlock_widget.cpp
 )
 
 set(HEADERS
@@ -34,6 +35,7 @@ set(HEADERS
     src/gantt_widget.h
     src/sync_timeline_widget.h
     src/philosophers_widget.h
+    src/deadlock_widget.h
 )
 
 # Create executable
