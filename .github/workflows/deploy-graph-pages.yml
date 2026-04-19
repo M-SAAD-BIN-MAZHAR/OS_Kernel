@@ -33,10 +33,20 @@ jobs:
         with:
           enablement: true
 
+      - name: Prepare Pages Site
+        run: |
+          rm -rf _site
+          mkdir -p _site/graphify-out
+          cp -a graphify-out/. _site/
+          cp -a graphify-out/. _site/graphify-out/
+          if [ -f index.html ]; then
+            cp -a index.html _site/index.html
+          fi
+
       - name: Upload Graph Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: graphify-out
+          path: _site
 
       - name: Deploy To GitHub Pages
         id: deployment
