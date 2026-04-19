@@ -10,31 +10,31 @@
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Get Number|Get Number]]
-- [[_COMMUNITY_Widget Setupui|Widget Setupui]]
-- [[_COMMUNITY_Memorysimulator Roundrobin|Memorysimulator Roundrobin]]
-- [[_COMMUNITY_Main Tcpserver|Main Tcpserver]]
-- [[_COMMUNITY_Back Value|Back Value]]
-- [[_COMMUNITY_Deadlockdetector Deadlocksimulator|Deadlockdetector Deadlocksimulator]]
-- [[_COMMUNITY_Syncdemorunner Gantt|Syncdemorunner Gantt]]
-- [[_COMMUNITY_Completion Tcp|Completion Tcp]]
-- [[_COMMUNITY_Ossemaphore Signal|Ossemaphore Signal]]
-- [[_COMMUNITY_Module Sources|Module Sources]]
-- [[_COMMUNITY_Path Qt6|Path Qt6]]
-- [[_COMMUNITY_Philosophers Widget|Philosophers Widget]]
-- [[_COMMUNITY_Main Cmakecxxcompilerid|Main Cmakecxxcompilerid]]
-- [[_COMMUNITY_Osmutex|Osmutex]]
-- [[_COMMUNITY_Config|Config]]
-- [[_COMMUNITY_Logger|Logger]]
-- [[_COMMUNITY_Schedulerstatejson|Schedulerstatejson]]
-- [[_COMMUNITY_Resourcetype Resource|Resourcetype Resource]]
-- [[_COMMUNITY_Processmanager|Processmanager]]
-- [[_COMMUNITY_Processstate Pcb|Processstate Pcb]]
-- [[_COMMUNITY_Scheduler|Scheduler]]
-- [[_COMMUNITY_Metricsengine Metrics|Metricsengine Metrics]]
-- [[_COMMUNITY_Synctypes|Synctypes]]
-- [[_COMMUNITY_Tcb|Tcb]]
-- [[_COMMUNITY_Statetransition|Statetransition]]
+- [Get Number](#community-0---get-number)
+- [Widget Setupui](#community-1---widget-setupui)
+- [Memorysimulator Roundrobin](#community-2---memorysimulator-roundrobin)
+- [Main Tcpserver](#community-3---main-tcpserver)
+- [Back Value](#community-4---back-value)
+- [Deadlockdetector Deadlocksimulator](#community-5---deadlockdetector-deadlocksimulator)
+- [Syncdemorunner Gantt](#community-6---syncdemorunner-gantt)
+- [Completion Tcp](#community-7---completion-tcp)
+- [Ossemaphore Signal](#community-8---ossemaphore-signal)
+- [Module Sources](#community-9---module-sources)
+- [Path Qt6](#community-10---path-qt6)
+- [Philosophers Widget](#community-11---philosophers-widget)
+- [Main Cmakecxxcompilerid](#community-12---main-cmakecxxcompilerid)
+- [Osmutex](#community-13---osmutex)
+- [Config](#community-14---config)
+- [Logger](#community-15---logger)
+- [Schedulerstatejson](#community-16---schedulerstatejson)
+- [Resourcetype Resource](#community-17---resourcetype-resource)
+- [Processmanager](#community-18---processmanager)
+- [Processstate Pcb](#community-19---processstate-pcb)
+- [Scheduler](#community-20---scheduler)
+- [Metricsengine Metrics](#community-21---metricsengine-metrics)
+- [Synctypes](#community-22---synctypes)
+- [Tcb](#community-23---tcb)
+- [Statetransition](#community-24---statetransition)
 
 ## God Nodes (most connected - your core abstractions)
 1. `push_back()` - 47 edges
